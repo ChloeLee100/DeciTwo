@@ -4,8 +4,5 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/DeciTwo/",
-  build: {
-    outDir: "docs",
-    emptyOutDir: true,
-  },
+  build: { outDir: "docs", emptyOutDir: true },
 });
