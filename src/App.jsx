@@ -10,8 +10,7 @@ import NotFound from "./pages/NotFound.jsx";
 export default function App() {
   const location = useLocation();
 
-  // When Create modal is open, we disable the header create button.
-  const isCreateRoute = location.pathname === "/create";
+  const isCreateRoute = location.pathname.endsWith("/create");
 
   return (
     <div className="appShell">
