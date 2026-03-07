@@ -1,3 +1,7 @@
+export function getSeedComparisons() {
+  return [];
+}
+
 // export function getSeedComparisons() {
 //   const now = Date.now();
 //   return [
