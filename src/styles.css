@@ -21,7 +21,7 @@ body {
 .topBar {
   height: 86px;
   background: var(--blue);
-  padding: 0 28px;
+  /* padding: 0 28px; */
   border-bottom: 2px solid rgba(0,0,0,0.15);
   display: flex;
   align-items: center;
@@ -29,11 +29,14 @@ body {
 }
 
 .container {
-  width: 45%;
+  /* width: 45%; */
+  width: min(980px, calc(100% - 48px));
+  margin: 0 auto;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
 
 .brand {
