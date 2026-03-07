@@ -58,6 +58,33 @@ body {
   font-weight: 600;
 }
 
+@media (max-width: 700px) {
+  .topBar {
+    height: auto;
+    padding: 14px 0;
+  }
+
+  .container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 12px;
+  }
+
+  .brandLogo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .brandName {
+    font-size: 28px;
+  }
+
+  .pillBtn {
+    padding: 12px 18px;
+    font-size: 15px;
+  }
+}
+
 .pillBtn {
   border: none;
   background: #111;
