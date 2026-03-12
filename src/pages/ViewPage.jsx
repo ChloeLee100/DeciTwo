@@ -46,7 +46,7 @@ export default function ViewPage() {
               <div className="viewLabel">File:</div>
               {opt.attachments.map((a, idx) => (
                 <div className="viewText" key={idx}>
-                  {isProbablyImageData(a) ? (
+                  {isImageSource(a) ? (
                     <img className="thumbImg" src={a} alt={`${opt.name} attachment`} />
                   ) : (
                     <span className="mono">{a}</span>
@@ -148,6 +148,21 @@ export default function ViewPage() {
   );
 }
 
-function isProbablyImageData(value) {
-  return typeof value === "string" && value.startsWith("data:image/");
+function isImageSource(value) {
+  if (typeof value !== "string") return false;
+
+  const v = value.trim().toLowerCase();
+
+  return (
+    v.startsWith("data:image/") ||
+    v.startsWith("http://") ||
+    v.startsWith("https://") ||
+    v.startsWith("/") ||
+    v.endsWith(".png") ||
+    v.endsWith(".jpg") ||
+    v.endsWith(".jpeg") ||
+    v.endsWith(".gif") ||
+    v.endsWith(".webp") ||
+    v.endsWith(".svg")
+  );
 }

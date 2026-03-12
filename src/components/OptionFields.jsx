@@ -29,6 +29,36 @@ export default function OptionFields({
     set({ [key]: ensureAtLeastOne(next) });
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please upload an image file.");
+      e.target.value = "";
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Please upload an image smaller than 2MB.");
+      e.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const result = reader.result;
+      if (typeof result !== "string") return;
+
+      const current = (option.attachments || []).filter((x) => x.trim() !== "");
+      set({ attachments: [...current, result] });
+    };
+
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
   return (
     <div className="optionCol">
       <div className="fieldRow">
@@ -42,14 +72,26 @@ export default function OptionFields({
       </div>
 
       {showFileInputs && (
-        <DynamicList
-          label="Insert file (image data/url)"
-          items={ensureAtLeastOne(option.attachments)}
-          placeholder="Upload image URL"
-          onChangeItem={(i, v) => updateListItem("attachments", i, v)}
-          onAddAfter={(i) => addAfter("attachments", i)}
-          onRemoveAt={(i) => removeAt("attachments", i)}
-        />
+        <>
+          <DynamicList
+            label="Insert file (image data/url)"
+            items={ensureAtLeastOne(option.attachments)}
+            placeholder="Upload image URL"
+            onChangeItem={(i, v) => updateListItem("attachments", i, v)}
+            onAddAfter={(i) => addAfter("attachments", i)}
+            onRemoveAt={(i) => removeAt("attachments", i)}
+          />
+
+          <div className="fieldBlock">
+            <div className="fieldLabel">Upload image from computer:</div>
+            <input
+              className="textInput"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+            />
+          </div>
+        </>
       )}
 
       <DynamicList
